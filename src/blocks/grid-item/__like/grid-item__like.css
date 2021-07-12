@@ -1,0 +1,11 @@
+.grid-item__like {
+  padding: 0;
+  width: 22px;
+  height: 19px;
+  border: none;
+  background: none;
+  background-image: url(../../../images/like.svg);
+  cursor: pointer;
+  transition: opacity 0.15s ease-in;
+  flex: none;
+}
