@@ -14,7 +14,7 @@ export const register = (email, password) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({email, password})
-  })
+  }).then(checkResponse)
 };
 
 export const authorize = (email, password) => {
@@ -40,8 +40,6 @@ export const getContent = (token) => {return fetch(`${BASE_URL}/users/me`, {
     'Authorization': `Bearer ${token}`,
   },
 })
-  .then((res) => {
-    return res.json()
-  })
+  .then(checkResponse)
   .then((data) => data)
 }

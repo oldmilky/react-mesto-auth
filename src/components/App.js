@@ -118,7 +118,7 @@ function App() {
       // const newCards = cards.map((c) => c._id === card._id ? newCard : c);
       // // Обновляем стейт
       // setCards(newCards);
-      setCards((cards) => cards.map(cards.map((c) => c._id === card._id ? newCard : c)));
+      setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
     })
     .catch(error => api.errorHandler(error));
   }
@@ -155,16 +155,12 @@ function App() {
   // Регистрация
 
   function registration(email, password) {
-    auth.register(escapeHtml(email), password).then((res) => {
-      if(res.status === 201){
+    auth.register(escapeHtml(email), password)
+    .then(() => {
         handleInfoTooltipContent({iconPath: registrationOk, text: 'Вы успешно зарегистрировались!'})
         handleInfoTooltipPopupOpen();
         // Перенаправляем на страницу логина спустя 3сек и закрываем попап
         setTimeout(history.push, 3000, "/sign-in");
-      }
-      if(res.status === 400) {
-        console.log('Введный емейл ужезарегестрирован')
-      }
     }).catch((err)=> {
       handleInfoTooltipContent({iconPath: registrationNoOK, text: 'Что-то пошло не так! Попробуйте ещё раз.'})
       handleInfoTooltipPopupOpen();
@@ -180,15 +176,15 @@ function App() {
       if (!data) {
         throw new Error('Произошла ошибка');
       }
-      auth.getContent(data)
-        .then((res) => {
-          setEmail(res.data.email);
-        }).catch(err => console.log(err));
+      // auth.getContent(data)
+      //   .then((res) => {
+      //     setEmail(res.data.email);
+      //   }).catch(err => console.log(err));
         setLoggedIn(true);
         handleInfoTooltipContent({iconPath: registrationOk, text: 'Вы успешно авторизовались!'})
         handleInfoTooltipPopupOpen();
         // Перенаправляем на главную страницу спустя 3сек и закрываем попап
-        setTimeout(history.push, 3000, "/");
+        history.push("/");
     }).catch((err) => {
       handleInfoTooltipContent({iconPath: registrationNoOK, text: 'Что то пошло не так!'})
       handleInfoTooltipPopupOpen();
