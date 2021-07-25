@@ -173,6 +173,7 @@ function App() {
   function authorization(email, password) {
     auth.authorize(escapeHtml(email), password )
     .then((data) => {
+      setEmail(email);
       if (!data) {
         throw new Error('Произошла ошибка');
       }
@@ -180,9 +181,9 @@ function App() {
       //   .then((res) => {
       //     setEmail(res.data.email);
       //   }).catch(err => console.log(err));
-        setLoggedIn(true);
+        setLoggedIn(true)
         handleInfoTooltipContent({iconPath: registrationOk, text: 'Вы успешно авторизовались!'})
-        handleInfoTooltipPopupOpen();
+        handleInfoTooltipPopupOpen()
         // Перенаправляем на главную страницу спустя 3сек и закрываем попап
         history.push("/");
     }).catch((err) => {
@@ -256,13 +257,11 @@ function App() {
         card={selectedCard} 
         onClose={closeAllPopups}
       />
-      {currentUser &&
           <InfoTooltip
             isOpen={isInfoTooltipPopupOpen} 
             onClose={closeAllPopups} 
             message={message}
-          /> 
-        } 
+          />
     </CurrentUserContext.Provider>
   );
 }
